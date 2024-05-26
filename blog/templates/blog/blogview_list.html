@@ -1,0 +1,44 @@
+{% extends 'mailing/base.html' %}
+{% load photo_tags %}
+{% block content %}
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Блог</h1>
+                <p class="lead text-body-secondary">Наш сайт является домашней работой. Тут нет настоящей статьи</p>
+                <a href="{% url 'blog:create' %}" class="btn bg-black-subtle">Добавить статью</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for blog in object_list %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="{{ blog.photo | media_filter }}" class="img-fluid" alt="blog photo">
+                            <div class="card-body">
+                                <p class="card-text">{{ blog }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <ul class="list-unstyled">
+                                            <li><a href="{% url 'blog:detail' blog.pk %}" class="btn btn-primary">Посмотреть</a>
+                                                <a href="{% url 'blog:update' blog.pk %}" class="btn btn-primary">Изменить</a>
+                                            <a href="{% url 'blog:delete' blog.pk %}" class="btn btn-primary">Удалить</a>
+                                            </li>
+
+
+                                            <li><p class="text-black">{{ blog.content|slice:100 }}</p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

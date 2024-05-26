@@ -1,0 +1,72 @@
+[
+{
+  "model": "blog.blogview",
+  "pk": 8,
+  "fields": {
+    "heading": "Блог №1",
+    "slug": "blog-1",
+    "photo": "blogs/state2.jpg",
+    "content": "блог",
+    "created_at": "2024-03-25",
+    "is_published": true,
+    "views_count": 2,
+    "author": null
+  }
+},
+{
+  "model": "blog.blogview",
+  "pk": 9,
+  "fields": {
+    "heading": "Блог №2",
+    "slug": "blog-2",
+    "photo": "blogs/state3.jpg",
+    "content": "Мы крутые",
+    "created_at": "2024-03-25",
+    "is_published": true,
+    "views_count": 8,
+    "author": null
+  }
+},
+{
+  "model": "blog.blogview",
+  "pk": 10,
+  "fields": {
+    "heading": "Блог №3",
+    "slug": "blog-3",
+    "photo": "blogs/state4.jpg",
+    "content": "Крайняя статья",
+    "created_at": "2024-03-25",
+    "is_published": true,
+    "views_count": 1,
+    "author": null
+  }
+},
+{
+  "model": "blog.blogview",
+  "pk": 11,
+  "fields": {
+    "heading": "Доп статья",
+    "slug": "dop-statya",
+    "photo": "",
+    "content": "Статья проверки рандома",
+    "created_at": "2024-03-25",
+    "is_published": true,
+    "views_count": 3,
+    "author": null
+  }
+},
+{
+  "model": "blog.blogview",
+  "pk": 12,
+  "fields": {
+    "heading": "Ещё одна проверка",
+    "slug": "eschyo-odna-proverka",
+    "photo": "blogs/state1.jpg",
+    "content": "Рандом работает) Надеюсь)))",
+    "created_at": "2024-03-25",
+    "is_published": true,
+    "views_count": 2,
+    "author": null
+  }
+}
+]

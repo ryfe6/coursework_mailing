@@ -3,12 +3,9 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Блог</h1>
-                <p class="lead text-body-secondary">Наш сайт является курсовой работой, но рассылка работает по настоящему.</p>
+                <h1 class="fw-light">SkyMailing</h1>
+                <p class="lead text-body-secondary">Здесь вы можете создать рассылку.</p>
                 <a href="{% url 'mailing:mailing_create' %}" class="btn bg-black-subtle">Создать рассылку</a>
-                <a href="{% url 'mailing:mailing_attempt_list_view' %}" class="btn bg-black-subtle">Посмотреть статус рассылок</a>
-                <a href="{% url 'mailing:mailing_message_list_view' %}" class="btn bg-black-subtle">Посмотреть сообщения для рассылок</a>
-                <a href="{% url 'mailing:client_list_view' %}" class="btn bg-black-subtle">Посмотреть клиентов для рассылок</a>
             </div>
         </div>
     </section>
@@ -17,28 +14,42 @@
         <div class="container">
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
                 {% for mailing in object_list %}
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <p class="card-text">{{ mailing }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <ul class="list-unstyled">
-                                            <li><a href="{% url 'mailing:mailing_detail' mailing.pk %}" class="btn btn-primary">Посмотреть</a>
-                                                <a href="{% url 'mailing:mailing_update' mailing.pk %}" class="btn btn-primary">Изменить</a>
-                                            <a href="{% url 'mailing:mailing_delete' mailing.pk %}" class="btn btn-primary">Удалить</a>
-                                            </li>
+                    {% if perms.mailing.view_mailing or mailing.user == request.user %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <p class="card-text">{{ mailing.message|slice:20 }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <ul class="list-unstyled">
+                                                <li><p class="card-footer-tabs">{{ mailing.status_mailing }}</p></li>
+                                                <li><a href="{% url 'mailing:mailing_detail' mailing.pk %}"
+                                                       class="btn btn-primary">Посмотреть</a>
+                                                    {% if perms.mailing.cancel_mailing_status_mailing %}
+                                                        <a href="{% url 'mailing:mailing_manager_update' mailing.pk %}"
+                                                           class="btn btn-primary">Изменить статус рассылки</a>
+                                                    {% endif %}
+                                                    {% if request.user.is_staff or mailing.user == request.user %}
+                                                        <a href="{% url 'mailing:mailing_update' mailing.pk %}"
+                                                           class="btn btn-primary m-md-1">Изменить</a>
+                                                        <a href="{% url 'mailing:mailing_delete' mailing.pk %}"
+                                                           class="btn btn-primary">Удалить</a>
+                                                    {% endif %}
+
+                                                </li>
 
 
-                                            <li><p class="text-black">{{ mailing.message|slice:100 }}</p></li>
-                                        </ul>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
+
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 {% extends 'mailing/base.html' %}
+{% load photo_tags %}
 {% block content %}
 <div class="container mt-5">
     <div class="row">
@@ -8,13 +9,12 @@
                     <h2 class="card-title text-center mb-4">Создать запись</h2>
                     <form id="createForm" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <p>Хотите удалить?</p>
                         <div class="mb-3">
-                            {{ object.header }}
+                            {{ form.as_p }}
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Удалить</button>
-                            <a href="{% url 'mailing:mailing_attempt_list_view' %}" class="btn btn-primary">Отмена</a>
+                            <button type="submit" class="btn btn-primary">Создать</button>
+                            <a href="{% url 'blog:list' %}" class="btn btn-primary">Назад</a>
                         </div>
                     </form>
                 </div>

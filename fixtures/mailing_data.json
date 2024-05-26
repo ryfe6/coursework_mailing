@@ -1,0 +1,92 @@
+[
+{
+  "model": "mailing.clientservice",
+  "pk": 2,
+  "fields": {
+    "email": "kopteleva78@mail.ru",
+    "name": "Kopteleva Natalia Sergeevna",
+    "comments": "ttk",
+    "user": 2
+  }
+},
+{
+  "model": "mailing.clientservice",
+  "pk": 4,
+  "fields": {
+    "email": "denis.koptelev@x.ru",
+    "name": "Денис Иванович Коптелев",
+    "comments": "fjhk",
+    "user": 6
+  }
+},
+{
+  "model": "mailing.messagemailing",
+  "pk": 4,
+  "fields": {
+    "subject_line": "High help",
+    "body": "I need help samurai",
+    "user": 2
+  }
+},
+{
+  "model": "mailing.messagemailing",
+  "pk": 5,
+  "fields": {
+    "subject_line": "первая тема",
+    "body": "good",
+    "user": 6
+  }
+},
+{
+  "model": "mailing.mailing",
+  "pk": 30,
+  "fields": {
+    "create_at": "2024-05-26T19:39:34.890Z",
+    "quit_at": "2024-05-26T19:39:30Z",
+    "next_send_time": "2024-05-27T19:39:30Z",
+    "period_mailing": "Раз в день",
+    "status_mailing": "Завершена",
+    "message": 5,
+    "user": 6,
+    "client": [
+      4
+    ]
+  }
+},
+{
+  "model": "mailing.mailing",
+  "pk": 31,
+  "fields": {
+    "create_at": "2024-05-26T21:14:54.220Z",
+    "quit_at": "2024-05-26T21:14:38Z",
+    "next_send_time": "2024-05-27T21:15:38Z",
+    "period_mailing": "Раз в день",
+    "status_mailing": "Завершена",
+    "message": 4,
+    "user": 2,
+    "client": [
+      2
+    ]
+  }
+},
+{
+  "model": "mailing.mailingattempt",
+  "pk": 3,
+  "fields": {
+    "date_last_mailing": "2024-05-26T21:15:02.058Z",
+    "status_mailing": true,
+    "server_response": null,
+    "mailing": 30
+  }
+},
+{
+  "model": "mailing.mailingattempt",
+  "pk": 4,
+  "fields": {
+    "date_last_mailing": "2024-05-26T21:16:01.519Z",
+    "status_mailing": true,
+    "server_response": null,
+    "mailing": 31
+  }
+}
+]
