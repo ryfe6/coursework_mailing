@@ -1,0 +1,36 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1">
+                {% for us in object_list %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <p class="card-text"> Email - {{ us.email }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <ul class="list-unstyled">
+                                            {% if us.is_active == True %}
+                                                <li><p class="card-footer-tabs">Пользователь Активен</p></li>
+                                                <a href="{% url 'users:user_ban' us.pk %}" class="btn btn-primary">Заблокировать
+                                                    пользователя</a>
+                                            {% elif us.is_active == False %}
+
+                                                <li><p class="card-footer-tabs">Пользователь Заблокирован</p></li>
+                                                <a href="{% url 'users:user_ban' us.pk %}" class="btn btn-primary">Активировать
+                                                    пользователя</a>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'mailing/base.html' %}
+{% load photo_tags %}
+{% block content %}
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-8 col-md-8 mx-auto">
+                <h1 class="fw-light">SkyMailing</h1>
+                <p class="lead text-body-secondary">Наш сайт является курсовой работой, но рассылка работает по
+                    настоящему.</p>
+                <a href="{% url 'mailing:mailing_list' %}" class="btn bg-black-subtle">Посмотреть рассылки</a>
+                <a href="{% url 'mailing:mailing_attempt_list_view' %}" class="btn bg-black-subtle">Посмотреть статус
+                    рассылок</a>
+                <a href="{% url 'mailing:mailing_message_list_view' %}" class="btn bg-black-subtle">Посмотреть сообщения
+                    для рассылок</a>
+                <a href="{% url 'mailing:client_list_view' %}" class="btn bg-black-subtle">Посмотреть клиентов для
+                    рассылок</a>
+                <a href="{% url 'blog:list' %}" class="btn bg-black-subtle">Блог</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="album py-5 bg-body-tertiary">
+
+        <div class="container">
+            <p class="card bg-black-subtle"> Количество рассылок - {{ mailing_count }}</p>
+            <p class="card bg-black-subtle"> Количество запущенных рассылок - {{ started_mailing_count }}</p>
+            <p class="card bg-black-subtle"> Количество уникальных клиентов - {{ clientservice_count }}</p>
+            <div class="row row-cols-lg-1 row-cols-lg-2 row-cols-lg-3 g-3">
+                {% for main_ in object_list %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <p class="card-text">{{ main_.heading|slice:20 }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <ul class="list-unstyled">
+                                            <li><p class="card-footer-tabs">{{ main_.content }}</p></li>
+                                            <img src="{{ main_.photo | media_filter }}" class="img-fluid"
+                                                 alt="blog photo">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

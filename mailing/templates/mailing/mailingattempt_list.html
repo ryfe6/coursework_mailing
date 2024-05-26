@@ -3,9 +3,9 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light"></h1>
-                <p class="lead text-body-secondary">Наш сайт является курсовой работой, но рассылка работает по настоящему.</p>
-                <a href="{% url 'mailing:mailing_attempt_create' %}" class="btn bg-black-subtle">Создать рассылку</a>
+                <h1 class="fw-light"> Статусы созданных рассылок</h1>
+                <p class="lead text-body-secondary">На данной страницы вы можете отследить статус созданной
+                    рассылки.</p>
             </div>
         </div>
     </section>
@@ -13,28 +13,35 @@
     <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {% for items in object_list %}
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <p class="card-text">{{ items }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <ul class="list-unstyled">
-                                            <li><a href="{% url 'mailing:mailing_attempt_detail' items.pk %}" class="btn btn-primary">Посмотреть</a>
-                                                <a href="{% url 'mailing:mailing_attempt_update' items.pk %}" class="btn btn-primary">Изменить</a>
-                                                <a href="{% url 'mailing:mailing_attempt_delete' items.pk %}" class="btn btn-primary">Удалить</a>
-                                            </li>
+            <div class="row row-cols-1 row row-cols-2">
+                {% for attempt in object_list %}
+                    {% if attempt.mailing.user == request.user %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    {% if attempt.status_mailing == True %}
+                                        <p class="card-text">Статус рассылки - Успешно отправлена</p>
+                                    {% elif attempt.status_mailing == False %}
+                                        <p class="card-text">Статус рассылки - Не удалось отправить</p>
+                                    {% endif %}
 
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <ul class="list-unstyled">
 
-                                            <li><p class="text-black">{{ items.content|slice:100 }}</p></li>
-                                        </ul>
+                                                <li><p class="card-text">Пользователь - {{ attempt.mailing.user }}</p>
+                                                </li>
+                                                <li><p class="card-text">Тема сообщения
+                                                    - {{ attempt.mailing.message }}</p></li>
+                                                <li><p class="text-black"> Дата последней отправки
+                                                    - {{ attempt.date_last_mailing|slice:100 }}</p></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

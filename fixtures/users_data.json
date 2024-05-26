@@ -1,0 +1,67 @@
+[
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$38nEYyUhl6NWgqnHzP3axT$O4t/Ups6gr57J031Ih6ioakPN4ubM9Dwcpl88fL1nQM=",
+    "last_login": "2024-05-26T21:14:38.343Z",
+    "is_superuser": true,
+    "first_name": "Denis",
+    "last_name": "koptelev",
+    "is_staff": true,
+    "date_joined": "2024-05-18T07:40:32.164Z",
+    "email": "admin@ryfe.pro",
+    "country": "",
+    "avatar": "",
+    "phone": null,
+    "is_active": true,
+    "ver_code": "010126",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$NSIxuquVgxwaD1IsijyAdW$Z2xLBOcnk/PjGCbkenwT6Yyli0/UKfxQG5JTPE5gZLY=",
+    "last_login": "2024-05-26T20:02:54.091Z",
+    "is_superuser": false,
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "date_joined": "2024-05-23T18:34:32Z",
+    "email": "denis.koptelev@yandex.ru",
+    "country": "russia",
+    "avatar": "",
+    "phone": null,
+    "is_active": true,
+    "ver_code": "826637",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$5tWOq0doZDniJwtKI04vdS$mfcERHX2ErkA3VFzkZAXXECqDyfTLgwLXTwpKQ8X2Ok=",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "Denis",
+    "last_name": "koptelev",
+    "is_staff": false,
+    "date_joined": "2024-05-26T22:25:22.434Z",
+    "email": "manager@sky.pro",
+    "country": "",
+    "avatar": "",
+    "phone": null,
+    "is_active": true,
+    "ver_code": "609353",
+    "groups": [
+      1
+    ],
+    "user_permissions": []
+  }
+}
+]

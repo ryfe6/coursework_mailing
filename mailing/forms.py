@@ -1,52 +1,61 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import BooleanField
-from .models import MessageMailing, ClientService, Mailing, MailingAttempt
+
+from users.models import User
+
+from .models import ClientService, Mailing, MailingAttempt, MessageMailing
 
 
 class StyleFormMixin:
     """Миксин класс для красивого вывода форм."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             if isinstance(field, BooleanField):
-                field.widget.attrs['class'] = 'form-check-input'
+                field.widget.attrs["class"] = "form-check-input"
             else:
-                field.widget.attrs['class'] = 'form-control'
+                field.widget.attrs["class"] = "form-control"
 
 
-class MailingForm(forms.ModelForm):
+class MailingForm(StyleFormMixin, forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(MailingForm, self).__init__(*args, **kwargs)
+        us = User.objects.all()
+        for u in us:
+            self.fields["client"].queryset = ClientService.objects.filter(user=u.id)
+            self.fields["message"].queryset = MessageMailing.objects.filter(user=u.id)
+
     class Meta:
         model = Mailing
-        fields = '__all__'
+        fields = ["quit_at", "next_send_time", "period_mailing", "client", "message"]
 
 
-class MailingAttemptForm(forms.ModelForm):
+class MailingFormManager(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Mailing
+        fields = [
+            "status_mailing",
+        ]
+
+
+class MailingAttemptForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = MailingAttempt
-        fields = '__all__'
+        fields = "__all__"
 
 
 # Форма для модели MessageMailing
-class MessageMailingForm(forms.ModelForm):
+class MessageMailingForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = MessageMailing
-        fields = ['subject_line', 'body', 'user']
-        widgets = {
-            'subject_line': forms.TextInput(attrs={'class': 'form-control'}),
-            'body': forms.Textarea(attrs={'class': 'form-control'}),
-            'user': forms.Select(attrs={'class': 'form-control'}),
-        }
+        fields = ["subject_line", "body"]
 
 
 # Форма для модели ClientService
-class ClientServiceForm(forms.ModelForm):
+class ClientServiceForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = ClientService
-        fields = ['email', 'name', 'comments', 'user']
-        widgets = {
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'comments': forms.Textarea(attrs={'class': 'form-control'}),
-            'user': forms.Select(attrs={'class': 'form-control'}),
-        }
-
+        fields = ["email", "name", "comments"]
